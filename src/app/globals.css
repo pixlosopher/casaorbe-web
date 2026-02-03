@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Casa Orbe Brand Colors */
+  --orbe-sage: #B5C4A1;
+  --orbe-sage-light: #D4DEC7;
+  --orbe-sage-dark: #8FA07A;
+  --orbe-cream: #F5F2EB;
+  --orbe-terracotta: #C4A484;
+  --orbe-charcoal: #2D2D2D;
+  --orbe-warm-white: #FAF8F5;
+
+  /* Possible Ideas Colors (for tech sections) */
+  --possible-cyan: #04ACC8;
+  --possible-green: #9AC32E;
+
+  --background: #FAF8F5;
+  --foreground: #2D2D2D;
 }
 
 @theme inline {
@@ -12,15 +25,19 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: var(--orbe-sage);
+  color: var(--orbe-charcoal);
 }
