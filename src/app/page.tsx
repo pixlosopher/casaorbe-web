@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, MapPin, Calendar, Users, Sparkles, Instagram, Mail } from "lucide-react";
 
 const SERVICES = [
@@ -40,12 +41,15 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-sm border-b border-[#B5C4A1]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-3">
-              {/* Placeholder for logo - replace with actual logo */}
-              <div className="w-10 h-10 rounded-full bg-[#B5C4A1] flex items-center justify-center">
-                <span className="text-[#2D2D2D] text-xs font-bold">CO</span>
-              </div>
-              <span className="text-xl font-semibold tracking-tight">Casa Orbe</span>
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
+              <Image
+                src="/images/casaorbe-logo.png"
+                alt="Casa Orbe Logo"
+                width={37}
+                height={80}
+                className="object-contain h-12 w-auto"
+                priority
+              />
             </Link>
             <div className="hidden md:flex items-center gap-8">
               <Link href="#espacio" className="text-[#2D2D2D]/70 hover:text-[#2D2D2D] transition">
@@ -362,9 +366,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#B5C4A1] flex items-center justify-center">
-                <span className="text-[#2D2D2D] text-xs font-bold">CO</span>
-              </div>
+              <Image
+                src="/images/casaorbe-logo.png"
+                alt="Casa Orbe Logo"
+                width={28}
+                height={60}
+                className="object-contain h-10 w-auto"
+              />
               <div>
                 <span className="font-semibold">Casa Orbe</span>
                 <p className="text-sm text-[#2D2D2D]/60">by Possible Ideas (desde 2013)</p>
