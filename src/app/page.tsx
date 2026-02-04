@@ -38,14 +38,11 @@ const TECH_SERVICES = [
 ];
 
 const GALLERY_IMAGES = [
-  { src: "/images/gallery/patio.jpg", alt: "Patio central de Casa Orbe", caption: "Patio Central" },
   { src: "/images/gallery/galeria-blobb.jpg", alt: "Exposición BLOBB en la galería", caption: "Exposición BLOBB" },
-  { src: "/images/gallery/exposicion.jpg", alt: "Visitantes en la exposición", caption: "Arte y Tecnología" },
-  { src: "/images/gallery/galeria-wide.jpg", alt: "Vista amplia de la galería", caption: "Galería Principal" },
+  { src: "/images/gallery/patio.jpg", alt: "Patio central de Casa Orbe", caption: "Patio Central" },
+  { src: "/images/gallery/techo-historico.jpg", alt: "Techo histórico pintado", caption: "Arquitectura Histórica" },
   { src: "/images/gallery/fablab.jpg", alt: "Fab Lab con equipos de fabricación", caption: "Fab Lab" },
-  { src: "/images/gallery/biblioteca.jpg", alt: "Área de biblioteca y lectura", caption: "Biblioteca" },
-  { src: "/images/gallery/techo-historico.jpg", alt: "Techo histórico pintado", caption: "Detalles Históricos" },
-  { src: "/images/gallery/impresiones-3d.jpg", alt: "Colección de impresiones 3D", caption: "Impresiones 3D" },
+  { src: "/images/gallery/galeria-wide.jpg", alt: "Vista amplia de la galería", caption: "Galería Principal" },
   { src: "/images/gallery/fachada.jpg", alt: "Fachada exterior de Casa Orbe", caption: "Fachada" },
 ];
 
@@ -71,9 +68,9 @@ export default function Home() {
               <Image
                 src="/images/casaorbe-logo.png"
                 alt="Casa Orbe Logo"
-                width={50}
-                height={108}
-                className="object-contain h-16 w-auto transition-transform group-hover:scale-105"
+                width={60}
+                height={130}
+                className="object-contain h-20 w-auto transition-transform group-hover:scale-105"
                 priority
               />
             </Link>
@@ -185,19 +182,22 @@ export default function Home() {
                   <h3 className="text-4xl md:text-5xl mb-3">BLOBB</h3>
                   <p className="text-[#2D2D2D]/60 text-sm mb-6">por Proyectos de Aquí</p>
 
-                  {/* Blob visual */}
-                  <div className="aspect-square bg-gradient-to-br from-[#B5C4A1]/30 to-[#C4A484]/20 rounded-2xl flex items-center justify-center mb-6 overflow-hidden relative">
-                    <div className="blob-shape w-32 h-32 bg-gradient-to-br from-[#B5C4A1] to-[#8FA07A] animate-float" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent" />
+                  {/* Exhibition Photo */}
+                  <div className="aspect-square rounded-2xl mb-6 overflow-hidden relative">
+                    <Image
+                      src="/images/gallery/blobb-hero.jpg"
+                      alt="Exposición BLOBB - Sillas amarillas"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 400px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
 
-                  <Link
-                    href="#contacto"
-                    className="inline-flex items-center gap-2 text-[#8FA07A] hover:text-[#6d8560] font-medium transition group"
-                  >
-                    <span>Agenda tu visita</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  <div className="inline-flex items-center gap-2 text-[#8FA07A] font-medium">
+                    <Calendar className="w-4 h-4" />
+                    <span>Inauguración en #ArtWeekendGDL</span>
+                  </div>
                 </div>
 
                 {/* Decorative offset border */}
@@ -317,35 +317,25 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Masonry-style Gallery Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {GALLERY_IMAGES.map((image, index) => (
+          {/* Clean Gallery Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {GALLERY_IMAGES.map((image) => (
               <div
                 key={image.src}
-                className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
-                  index === 0 ? 'col-span-2 row-span-2' :
-                  index === 3 ? 'col-span-2' :
-                  index === 5 ? 'row-span-2' : ''
-                }`}
+                className="group relative overflow-hidden rounded-2xl aspect-[4/3]"
               >
-                <div className={`relative ${
-                  index === 0 ? 'aspect-square' :
-                  index === 3 ? 'aspect-video' :
-                  index === 5 ? 'aspect-[3/4]' : 'aspect-square'
-                }`}>
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D2D2D]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  {/* Caption */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white font-medium text-lg">{image.caption}</p>
-                  </div>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-all duration-500 group-hover:scale-105 filter saturate-[0.9] group-hover:saturate-100"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+                {/* Subtle overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2D2D2D]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Caption */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-white font-medium">{image.caption}</p>
                 </div>
               </div>
             ))}
