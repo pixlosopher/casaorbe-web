@@ -37,6 +37,18 @@ const TECH_SERVICES = [
   "Prototipado",
 ];
 
+const GALLERY_IMAGES = [
+  { src: "/images/gallery/patio.jpg", alt: "Patio central de Casa Orbe", caption: "Patio Central" },
+  { src: "/images/gallery/galeria-blobb.jpg", alt: "Exposición BLOBB en la galería", caption: "Exposición BLOBB" },
+  { src: "/images/gallery/exposicion.jpg", alt: "Visitantes en la exposición", caption: "Arte y Tecnología" },
+  { src: "/images/gallery/galeria-wide.jpg", alt: "Vista amplia de la galería", caption: "Galería Principal" },
+  { src: "/images/gallery/fablab.jpg", alt: "Fab Lab con equipos de fabricación", caption: "Fab Lab" },
+  { src: "/images/gallery/biblioteca.jpg", alt: "Área de biblioteca y lectura", caption: "Biblioteca" },
+  { src: "/images/gallery/techo-historico.jpg", alt: "Techo histórico pintado", caption: "Detalles Históricos" },
+  { src: "/images/gallery/impresiones-3d.jpg", alt: "Colección de impresiones 3D", caption: "Impresiones 3D" },
+  { src: "/images/gallery/fachada.jpg", alt: "Fachada exterior de Casa Orbe", caption: "Fachada" },
+];
+
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -59,15 +71,19 @@ export default function Home() {
               <Image
                 src="/images/casaorbe-logo.png"
                 alt="Casa Orbe Logo"
-                width={40}
-                height={86}
-                className="object-contain h-14 w-auto transition-transform group-hover:scale-105"
+                width={50}
+                height={108}
+                className="object-contain h-16 w-auto transition-transform group-hover:scale-105"
                 priority
               />
             </Link>
             <div className="hidden md:flex items-center gap-10">
               <Link href="#espacio" className="text-sm tracking-wide text-[#2D2D2D]/60 hover:text-[#2D2D2D] transition relative group">
                 Espacio
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#8FA07A] transition-all group-hover:w-full" />
+              </Link>
+              <Link href="#galeria" className="text-sm tracking-wide text-[#2D2D2D]/60 hover:text-[#2D2D2D] transition relative group">
+                Galería
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#8FA07A] transition-all group-hover:w-full" />
               </Link>
               <Link href="#servicios" className="text-sm tracking-wide text-[#2D2D2D]/60 hover:text-[#2D2D2D] transition relative group">
@@ -286,6 +302,71 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Photo Gallery */}
+      <section id="galeria" className="py-32 px-6 lg:px-12 bg-[#F5F2EB]">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-sm tracking-widest text-[#8FA07A] uppercase font-medium">Galería</span>
+            <h2 className="text-5xl md:text-6xl mt-4 mb-6">
+              Descubre nuestro<br />
+              <span className="text-[#8FA07A]">espacio</span>
+            </h2>
+            <p className="text-xl text-[#2D2D2D]/60 leading-relaxed">
+              Una casona histórica donde convergen el arte contemporáneo y la fabricación digital.
+            </p>
+          </div>
+
+          {/* Masonry-style Gallery Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {GALLERY_IMAGES.map((image, index) => (
+              <div
+                key={image.src}
+                className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
+                  index === 0 ? 'col-span-2 row-span-2' :
+                  index === 3 ? 'col-span-2' :
+                  index === 5 ? 'row-span-2' : ''
+                }`}
+              >
+                <div className={`relative ${
+                  index === 0 ? 'aspect-square' :
+                  index === 3 ? 'aspect-video' :
+                  index === 5 ? 'aspect-[3/4]' : 'aspect-square'
+                }`}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D2D2D]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* Caption */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <p className="text-white font-medium text-lg">{image.caption}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Instagram CTA */}
+          <div className="text-center mt-12">
+            <a
+              href="https://instagram.com/casaorbegdl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 text-[#8FA07A] hover:text-[#6d8560] font-medium transition group"
+            >
+              <Instagram className="w-5 h-5" />
+              <span>Ver más en Instagram</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Services - Editorial Layout */}
       <section id="servicios" className="py-32 px-6 lg:px-12 bg-[#2D2D2D] text-white relative overflow-hidden">
         {/* Background decoration */}
@@ -494,17 +575,32 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right - Map placeholder */}
+            {/* Right - Google Maps */}
             <div className="bg-white rounded-3xl p-4 shadow-xl border border-[#B5C4A1]/20">
-              <div className="aspect-square bg-gradient-to-br from-[#B5C4A1]/20 to-[#C4A484]/10 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                <div className="text-center">
-                  <MapPin className="w-16 h-16 text-[#8FA07A] mx-auto mb-4" />
-                  <p className="text-[#2D2D2D]/40">Reforma 617, Centro</p>
-                  <p className="text-[#2D2D2D]/40">Guadalajara, Jalisco</p>
-                </div>
-                {/* Decorative circles */}
-                <div className="absolute top-10 left-10 w-20 h-20 border border-[#B5C4A1]/30 rounded-full" />
-                <div className="absolute bottom-20 right-10 w-32 h-32 border border-[#B5C4A1]/20 rounded-full" />
+              <div className="aspect-square rounded-2xl overflow-hidden relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.8384!2d-103.3491!3d20.6727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b1f6a9c2a7f7%3A0x9c9c9c9c9c9c9c9c!2sReforma%20617%2C%20Centro%2C%2044100%20Guadalajara%2C%20Jal.%2C%20Mexico!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full"
+                  title="Ubicación de Casa Orbe en Google Maps"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Reforma+617+Centro+Guadalajara+Jalisco+Mexico"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#8FA07A] hover:text-[#6d8560] font-medium transition group text-sm"
+                >
+                  <MapPin className="w-4 h-4" />
+                  <span>Abrir en Google Maps</span>
+                  <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
               </div>
             </div>
           </div>
@@ -521,9 +617,9 @@ export default function Home() {
                 <Image
                   src="/images/casaorbe-logo.png"
                   alt="Casa Orbe Logo"
-                  width={32}
-                  height={70}
-                  className="object-contain h-12 w-auto brightness-0 invert"
+                  width={40}
+                  height={86}
+                  className="object-contain h-14 w-auto brightness-0 invert"
                 />
                 <div>
                   <span className="text-xl font-medium">Casa Orbe</span>
@@ -539,7 +635,8 @@ export default function Home() {
             <div>
               <h4 className="font-medium mb-6 text-white/80">Espacio</h4>
               <ul className="space-y-3 text-white/50">
-                <li><Link href="#espacio" className="hover:text-white transition">Galería</Link></li>
+                <li><Link href="#espacio" className="hover:text-white transition">El Espacio</Link></li>
+                <li><Link href="#galeria" className="hover:text-white transition">Galería</Link></li>
                 <li><Link href="#servicios" className="hover:text-white transition">Servicios</Link></li>
                 <li><Link href="#tecnologia" className="hover:text-white transition">Tecnología</Link></li>
                 <li><Link href="#contacto" className="hover:text-white transition">Contacto</Link></li>
